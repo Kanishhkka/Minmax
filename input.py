@@ -8,6 +8,7 @@ def input_choose_piece(position, available_pieces=None):
                 return None
             coordinate = (int(coord) // 10), (int(coord) % 10)
             field = position.get_table()[coordinate[0]][coordinate[1]]
+            # field basically hai ki to get row and col from table
             if available_pieces:
                 if coordinate in available_pieces:
                     if position.get_white_to_move() and field.lower() == "b":
