@@ -56,12 +56,9 @@ class Position(object):
             for j in range(len(self._table[i])):
                 if self._table[i][j] == 'b':
                     num_white += 1
-                if self._table[i][j] == 'B':
-                    num_white += 1
                 if self._table[i][j] == 'c':
                     num_black += 1
-                if self._table[i][j] == 'C':
-                    num_black += 1
+                
         return num_white, num_black
 
     def find_move_played(self, previous):
@@ -81,12 +78,8 @@ class Position(object):
             for j in range(len(self._table[i])):
                 if self._table[i][j] == 'b':
                     white_value += 2
-                if self._table[i][j] == 'B':
-                    white_value += 3
                 if self._table[i][j] == 'c':
                     black_value += 2
-                if self._table[i][j] == 'C':
-                    black_value += 3
         self._evaluation = black_value - white_value
         return self._evaluation
 
@@ -101,17 +94,7 @@ class Position(object):
     #                     white_value += 7
     #                 else:
     #                     white_value += 5
-    #             if self._table[i][j] == 'B':
-    #                 white_value += 10
-    #             if self._table[i][j] == 'c':
-    #                 if i > 3:
-    #                     black_value += 7
-    #                 else:
-    #                     black_value += 5
-    #             if self._table[i][j] == 'C':
-    #                 black_value += 10
-    #     self._evaluation = black_value - white_value
-    #     return self._evaluation
+    #             if 
 
     def find_capturing_moves(self):
         captured = []
@@ -148,9 +131,6 @@ class Position(object):
                         white_value += 45
                     else:
                         white_value += 40
-                if self._table[i][j] == 'B':
-                    num_white += 1
-                    white_value += 60
                 if self._table[i][j] == 'c':
                     num_black += 1
                     if 2 < i < 5 and 1 < j < 6:  
@@ -159,9 +139,6 @@ class Position(object):
                         black_value += 45
                     else:
                         black_value += 40
-                if self._table[i][j] == 'C':
-                    num_black += 1
-                    black_value += 60
 
         self._evaluation = black_value - white_value
         if num_white == 0:
@@ -193,32 +170,8 @@ class Position(object):
     #                 else:
     #                     white_value += 40
     #             if self._table[i][j] == 'B':
-    #                 white_kings += 1
-    #                 num_white += 1
-    #                 white_value += 60
-    #             if self._table[i][j] == 'c':
-    #                 num_black += 1
-    #                 if 2 < i < 5 and 1 < j < 6:  
-    #                     black_value += 50
-    #                 elif i > 3:
-    #                     black_value += 45
-    #                 else:
-    #                     black_value += 40
-    #             if self._table[i][j] == 'C':
-    #                 black_kings += 1
-    #                 num_black += 1
-    #                 black_value += 60
-    #
-    #     self._evaluation = int(round(((1000 * (black_value - white_value)) / (num_white + num_black))))
-    #
-    #
-    #     if num_white == 0:
-    #         self._evaluation = inf
-    #         self._game_end = True
-    #     if num_black == 0:
-    #         self._evaluation = -inf
-    #         self._game_end = True
-    #     return self._evaluation
+    #             ack_value += 45
+    #                 el
 
     def generate_next_moves(self, forced=False):
         self._next_moves = []
@@ -228,7 +181,7 @@ class Position(object):
         for i in range(len(self._table)):
             for j in range(len(self._table[i])):
                 if self._white_to_move:
-                    if self._table[i][j] == "b" or self._table[i][j] == "B":
+                    if self._table[i][j] == "b" :
                         valid_moves = self.find_valid_moves_for_piece(
                             (i, j), forced)
                         for move in valid_moves:
@@ -246,7 +199,7 @@ class Position(object):
                                 all_moves.append(position)
 
                 else:
-                    if self._table[i][j] == "c" or self._table[i][j] == "C":
+                    if self._table[i][j] == "c":
                         valid_moves = self.find_valid_moves_for_piece(
                             (i, j), forced)
                         for move in valid_moves:
@@ -270,16 +223,16 @@ class Position(object):
     def generate_new_state(self, figure, move):
         table_copy = deepcopy(self._table)
         figure_type = table_copy[figure[0]][figure[1]]
-        if figure_type == "b" or figure_type == "B":
+        if figure_type == "b" :
             if move[0] == 0:  
-                table_copy[figure[0]][figure[1]] = "B"
+                table_copy[figure[0]][figure[1]] = "b"
             if figure[0] - move[0] == 2 or figure[0] - move[0] == -2:
                 row = figure[0] + (move[0] - figure[0]) // 2
                 column = figure[1] + (move[1] - figure[1]) // 2
                 table_copy[row][column] = "."
-        if figure_type == "c" or figure_type == "C":
+        if figure_type == "c" :
             if move[0] == 7:  
-                table_copy[figure[0]][figure[1]] = "C"
+                table_copy[figure[0]][figure[1]] = "c"
             if figure[0] - move[0] == 2 or figure[0] - move[0] == -2:
                 row = figure[0] + (move[0] - figure[0]) // 2
                 column = figure[1] + (move[1] - figure[1]) // 2
