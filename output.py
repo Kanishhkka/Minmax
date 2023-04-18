@@ -18,14 +18,14 @@ def print_table(table, selected=None, valid_moves=None):
         for j in range(len(table[i])):
             if j == 0:
                 print(i, end=" |")
-            if table[i][j] == "b" or table[i][j] == "B":
+            if table[i][j] == "b" :
                 if selected and ((i, j) in selected or (i, j) == selected):
                     print(bcolors.BG_BLUE + bcolors.BLACK + " " +
                           str(table[i][j]) + " " + bcolors.END, end="  ")
                 else:
                     print(bcolors.GREEN + " " +
                           str(table[i][j]) + " " + bcolors.END, end="  ")
-            elif table[i][j] == "c" or table[i][j] == "C":
+            elif table[i][j] == "c" :
                 if selected and ((i, j) in selected or (i, j) == selected):
                     print(bcolors.BG_BLUE + bcolors.BLACK + " " +
                           str(table[i][j]) + " " + bcolors.END, end="  ")
